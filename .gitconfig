@@ -1,0 +1,6 @@
+[core]
+	editor = '/Applications/Sublime Text.app/Contents/SharedSupport/bin' -n -w
+[push]
+	default = upstream
+[merge]
+	conflictstyle = diff3
