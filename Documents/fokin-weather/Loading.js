@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import App from "./App";
 
 
-export default function Loading() {
+function Loading() {
     return <View style={styles.container}>
         <Text style={styles.text}>Getting the Fucking Weather</Text>
     </View>
