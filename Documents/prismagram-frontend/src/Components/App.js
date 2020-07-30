@@ -8,7 +8,7 @@ export default () => (
   <ThemeProvider theme={Theme}>
     <>
       <GlobalStyles />
-      <AppRouter isLoggedin={false} />
+      <AppRouter isLoggedIn={false} />
     </>
   </ThemeProvider>
 );
