@@ -18,4 +18,10 @@ export default createGlobalStyle`
         color:${(props) => props.theme.blueColor};
         text-decoration:none;
     }
+    input:focus{
+        outline:none;
+    }
+    button {
+        margin-top: 15px;
+    }
 `;
