@@ -8,13 +8,13 @@ export const LOG_IN = gql`
 
 export const CREATE_ACCOUNT = gql`
   mutation createAccount(
-    $username: String!
+    $name: String!
     $email: String!
     $firstName: String
     $lastName: String
   ) {
     createAccount(
-      username: $username
+      name: $name
       email: $email
       firstName: $firstName
       lastName: $lastName

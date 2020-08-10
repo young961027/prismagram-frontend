@@ -8,10 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default () => {
   const [action, setAction] = useState("logIn");
-  const username = useInput("");
+  const name = useInput("");
   const firstName = useInput("");
   const lastName = useInput("");
-  const email = useInput("young961027@gmail.com");
+  const email = useInput("");
+  const secret = useInput("");
 
   const [requestSecretMutation] = useMutation(LOG_IN, {
     variables: { email: email.value },
@@ -20,7 +21,7 @@ export default () => {
   const [createAccountMutation] = useMutation(CREATE_ACCOUNT, {
     variables: {
       email: email.value,
-      username: username.value,
+      name: name.value,
       firstName: firstName.value,
       lastName: lastName.value,
     },
@@ -31,10 +32,15 @@ export default () => {
     if (action === "logIn") {
       if (email.value !== "") {
         try {
-          const { requestSecret } = await requestSecretMutation();
+          const {
+            data: { requestSecret },
+          } = await requestSecretMutation();
           if (!requestSecret) {
             toast.error("You don't have an account yet. Create one");
             setTimeout(() => setAction("sign up"), 3000);
+          } else {
+            toast.success("Check your inbox for your login secret.");
+            setAction("confirm");
           }
         } catch {
           toast.error("Can't request secret, try again.");
@@ -46,12 +52,14 @@ export default () => {
     } else if (action === "signUp") {
       if (
         email.value !== "" &&
-        username.value !== "" &&
+        name.value !== "" &&
         firstName.value !== "" &&
         lastName.value !== ""
       ) {
         try {
-          const { createAccount } = await createAccountMutation();
+          const {
+            data: { createAccount },
+          } = await createAccountMutation();
           if (!createAccount) {
             toast.error("Can't create account.");
           } else {
@@ -71,10 +79,11 @@ export default () => {
     <AuthPresenter
       setAction={setAction}
       action={action}
-      username={username}
+      name={name}
       firstName={firstName}
       lastName={lastName}
       email={email}
+      secret={secret}
       onSubmit={onSubmit}
     />
   );
