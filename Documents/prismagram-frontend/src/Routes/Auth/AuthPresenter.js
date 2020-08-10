@@ -74,24 +74,26 @@ export default ({
         </form>
       )}
       {action === "confirm" && (
-        <form onSubmit={onsubmit}>
+        <form onSubmit={onSubmit}>
           <Input placeholder="Paste your secret" required {...secret} />
           <Button text={"confirm"} />
         </form>
       )}
     </Form>
-    <StateChanger>
-      {action === "logIn" ? (
-        <>
-          Don't have an account?{" "}
-          <Link onClick={() => setAction("signUp")}>Sign up</Link>
-        </>
-      ) : (
-        <>
-          Have an account?{" "}
-          <Link onClick={() => setAction("logIn")}>Log in</Link>
-        </>
-      )}
-    </StateChanger>
+    {action !== "confirm" && (
+      <StateChanger>
+        {action === "logIn" ? (
+          <>
+            Don't have an account?{" "}
+            <Link onClick={() => setAction("signUp")}>Sign up</Link>
+          </>
+        ) : (
+          <>
+            Have an account?{" "}
+            <Link onClick={() => setAction("logIn")}>Log in</Link>
+          </>
+        )}
+      </StateChanger>
+    )}
   </Wrapper>
 );
